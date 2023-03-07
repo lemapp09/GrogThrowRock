@@ -9,12 +9,12 @@ public class Plane : MonoBehaviour
     private GameObject _plane;
 
     private void OnEnable() {
-        _spline.SetActive(true);
+        // _spline.SetActive(true);
         _plane.SetActive(true);
     }
 
     private void OnDisable() {
-        _spline.SetActive(false);
+        // _spline.SetActive(false);
         _plane.SetActive(false);
     }
 }

@@ -1,20 +1,25 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using BezierSolution;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PlaneCollision : MonoBehaviour
 {
     [SerializeField] 
     private BezierWalkerWithSpeed _splineWalker;
 
-    [SerializeField] 
-    private GameObject _redBox;
-    private void OnCollisionEnter(Collision collision) {
-        if ( collision.gameObject.CompareTag("Rock") ) {
-            _splineWalker.enabled = false;
-            _redBox.SetActive(true);
+    public void OnCollisionEnter(Collision collision) {
+        if ( this.GetComponent<Rigidbody>() != null) {
+            Rigidbody rigidBody = this.GetComponent<Rigidbody>();
+            Debug.Log("Plane Collided with " + collision.gameObject.name);
+            Debug.Log("Rock's Velocity " + rigidBody.velocity);
+            Debug.Log("Rock's Accumulated Force " + rigidBody.GetAccumulatedForce());
+
+            if (collision.gameObject.CompareTag("Rock")) {
+             _splineWalker.enabled = false;
+             rigidBody.useGravity = true;
+             rigidBody.isKinematic = false;
+            }
         }
     }
+    
 }

@@ -46,8 +46,7 @@ public class DebugDisplay : MonoBehaviour
         {
             if (log.Value == "")
                 displayText += log.Key + "\n";
-            else
-            {
+            else {
                 displayText += log.Key + ": " + log.Value + "\n";
             }
 

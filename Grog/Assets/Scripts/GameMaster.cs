@@ -18,6 +18,7 @@ public class GameMaster : MonoBehaviour
     private int _currentPlaneId = 0;
     private bool _isGameActive = true;
     private bool _isPlaneCrash = false;
+    private bool _stopTimer ;
     private bool _isTimeUp;
 
     void Awake() {
@@ -44,12 +45,15 @@ public class GameMaster : MonoBehaviour
     private IEnumerator ActivatePlane() {
         while (_isGameActive == true)
         {
-            // Debug.Log("GameMaster is Sending out plane #: " + _currentPlaneId);
+            Debug.Log("GameMaster is Sending out plane #: " + _currentPlaneId +
+                      ",/n ST:" + _stopTimer + " , PC: " + _isPlaneCrash);
             _planes[_currentPlaneId].gameObject.SetActive(true);
             
             for( float timer = _timeBetweenPlanes ; timer >= 0 ; timer -= Time.deltaTime ) {
-                if( _isPlaneCrash ) {
-                    timer = 0f;
+                if( _stopTimer ) {
+                    Debug.Log("Innner Loop Timer:" + timer);
+                    timer = -1f;
+                    _stopTimer = false;
                 }
                 yield return null ;
             }
@@ -65,13 +69,15 @@ public class GameMaster : MonoBehaviour
         }
     }
 
-    public void PlaneCrash(int planeID) {
+    public void PlaneCrash(int planeID)
+    {
+        _stopTimer = true;
         _isPlaneCrash = true;
         StartCoroutine(RemoveDownPlane(planeID));
     }
 
     private IEnumerator RemoveDownPlane(int planeId) {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         _planes[planeId].gameObject.SetActive(false);
         _isPlaneCrash = false;
     }

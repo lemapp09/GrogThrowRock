@@ -1,5 +1,6 @@
 using System;
 using BezierSolution;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -10,6 +11,9 @@ public class PlaneCollision : MonoBehaviour
     
     [SerializeField] 
     private int _planeID;
+
+    [SerializeField] 
+    private XROrigin _xrOrigin;
     
     [SerializeField]
     private AudioSource _audioSource;
@@ -41,6 +45,8 @@ public class PlaneCollision : MonoBehaviour
              _splineWalker.enabled = false;
              rigidBody.useGravity = true;
              rigidBody.isKinematic = false;
+             Vector3 vector = (this.transform.position - _xrOrigin.transform.position).normalized * 75f;
+             rigidBody.AddForce(vector.x, vector.y, vector.z, ForceMode.Impulse );
             }
         }
         GameMaster.Instance.PlaneCrash(_planeID);

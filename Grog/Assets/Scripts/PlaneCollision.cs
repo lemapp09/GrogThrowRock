@@ -15,13 +15,24 @@ public class PlaneCollision : MonoBehaviour
     private AudioSource _audioSource;
     // Sound Effect from
     // <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=14513">Pixabay</a>
-    private Vector3 _originalPos;
     
-    private void Awake() {
-        _originalPos = this.transform.position;
+    private void OnEnable() {
         _audioSource.Play();
+        this.transform.localPosition = Vector3.zero;
+        this.transform.localRotation = Quaternion.identity;
     }
 
+    private void OnDisable() {
+        _audioSource.Stop();
+        if (this.GetComponent<Rigidbody>() != null)
+        {
+            Rigidbody rigidBody = this.GetComponent<Rigidbody>();
+            _splineWalker.enabled = true;
+            rigidBody.useGravity = false;
+            rigidBody.isKinematic = true;
+        }
+    }
+    
     public void OnCollisionEnter(Collision collision) {
         if ( this.GetComponent<Rigidbody>() != null) {
             Rigidbody rigidBody = this.GetComponent<Rigidbody>();
@@ -35,15 +46,4 @@ public class PlaneCollision : MonoBehaviour
         GameMaster.Instance.PlaneCrash(_planeID);
     }
 
-    private void OnDisable()
-    {
-        if (this.GetComponent<Rigidbody>() != null)
-        {
-            Rigidbody rigidBody = this.GetComponent<Rigidbody>();
-            _splineWalker.enabled = true;
-            rigidBody.useGravity = false;
-            rigidBody.isKinematic = true;
-            this.transform.position = _originalPos;
-        }
-    }
 }

@@ -8,11 +8,11 @@ public class DebugDisplay : MonoBehaviour
 
     public TextMeshProUGUI _display;
 
-    private void Update()
+   /*  private void Update()
     {
         Debug.Log("Time:" + Time.time);
         Debug.Log(gameObject.name);
-    }
+    } */
 
     private void OnEnable()
     {

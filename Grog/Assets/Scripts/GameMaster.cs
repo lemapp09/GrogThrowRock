@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -24,8 +25,14 @@ public class GameMaster : MonoBehaviour
         StartSendingInPlane();
     }
 
+    private void OnEnable()
+    {
+        _audioSource.Play();
+    }
+
     private void OnDisable() {
         _isGameActive = false;
+        _audioSource.Stop();
     }
 
     private void StartSendingInPlane() {
@@ -35,14 +42,14 @@ public class GameMaster : MonoBehaviour
     }
 
     private IEnumerator ActivatePlane() {
-        while (_isGameActive == true) {
+        while (_isGameActive == true)
+        {
+            // Debug.Log("GameMaster is Sending out plane #: " + _currentPlaneId);
             _planes[_currentPlaneId].gameObject.SetActive(true);
             
             for( float timer = _timeBetweenPlanes ; timer >= 0 ; timer -= Time.deltaTime ) {
                 if( _isPlaneCrash ) {
-                    _isPlaneCrash = false;
                     timer = 0f;
-                    // yield break ;
                 }
                 yield return null ;
             }
@@ -66,5 +73,6 @@ public class GameMaster : MonoBehaviour
     private IEnumerator RemoveDownPlane(int planeId) {
         yield return new WaitForSeconds(10f);
         _planes[planeId].gameObject.SetActive(false);
+        _isPlaneCrash = false;
     }
 }

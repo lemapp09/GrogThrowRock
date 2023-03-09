@@ -21,11 +21,13 @@ public class GameMaster : MonoBehaviour
     private int _level = 1;
     private float _levelTimer;
 
-
-    void Awake() {
+    void Awake()
+    {
+        _modalText.fontSize = 18;
         Instance = this; 
-        if (_planes.Length > 0 ) {
-            _planes[_currentPlaneId].gameObject.SetActive(true);
+        if (_planes.Length > 0 )
+        {
+            Instantiate(_planes[_currentPlaneId]);
         }
     }
 
@@ -37,7 +39,7 @@ public class GameMaster : MonoBehaviour
     private void OnDisable() {
         _audioSource.Stop();
     }
-
+    
     private void Update() {
         _levelTimer += Time.deltaTime;
     }
@@ -46,11 +48,12 @@ public class GameMaster : MonoBehaviour
     {
         _currentPlaneId++;
         if (_currentPlaneId < _planes.Length) {
-            _planes[_currentPlaneId].gameObject.SetActive(true);
+            Instantiate(_planes[_currentPlaneId]);
         } else {
             StartCoroutine(DisplayLevelWin(_level));
         }
     }
+    
     private IEnumerator DisplayLevelWin(int level)
     {
         _UISample.SetActive(true);
@@ -62,7 +65,7 @@ public class GameMaster : MonoBehaviour
         _UISample.SetActive(false);
         _level++;
         _currentPlaneId = 0;
-        _planes[_currentPlaneId].gameObject.SetActive(true);
+        Instantiate(_planes[_currentPlaneId]);
         _levelTimer = 0f;
     }
 }

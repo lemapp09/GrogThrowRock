@@ -23,18 +23,22 @@ public class PlaneCollision : MonoBehaviour
     // Sound Effect from
     // <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=14513">Pixabay</a>
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         _audioSource.Play();
         this.transform.localPosition = Vector3.zero;
         this.transform.localRotation = Quaternion.identity;
         StartCoroutine(ResizePlane());
+
         if (_flames)
             _flames.SetActive(false);
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         _audioSource.Stop();
-        if (this.GetComponent<Rigidbody>() != null) {
+        if (this.GetComponent<Rigidbody>() != null)
+        {
             Rigidbody rigidBody = this.GetComponent<Rigidbody>();
             _splineWalker.enabled = true;
             rigidBody.useGravity = false;
@@ -52,13 +56,13 @@ public class PlaneCollision : MonoBehaviour
             Rigidbody rigidBody = this.GetComponent<Rigidbody>();
 
             Rock rock = collision.gameObject.GetComponent<Rock>();
-            //if (collision.gameObject.CompareTag("Rock")) {
             if (rock)
             {
                 _splineWalker.enabled = false;
                 rigidBody.useGravity = true;
                 rigidBody.isKinematic = false;
                 Vector3 vector = (this.transform.position - _xrOrigin.transform.position).normalized * 15f;
+
                 rigidBody.AddForce(vector.x, vector.y, vector.z, ForceMode.Impulse);
 
                 if (_crashClips.Length > 0)
@@ -94,6 +98,4 @@ public class PlaneCollision : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
     }
-
-
 }

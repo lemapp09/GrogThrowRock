@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -90,6 +91,14 @@ class Rock : MonoBehaviour
         _spawnPosition = transform.position;
 
         _homingCollider.enabled = false;
+    }
+
+    void Update()
+    {
+        if (this.transform.position.y < -2)
+        {
+            GoHome();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

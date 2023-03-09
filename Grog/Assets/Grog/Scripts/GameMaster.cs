@@ -19,6 +19,10 @@ public class GameMaster : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _headerText;
     [SerializeField] private TextMeshProUGUI _modalText;
     [SerializeField] private GameObject[] _fireworks;
+    [SerializeField] private int _planeMultiplePerLevel = 4;
+    private int _planeCount;
+    private int _score;
+    private int _numberOfPlanesHit;
     private int _level = 1;
     private float _levelTimer;
 
@@ -29,6 +33,7 @@ public class GameMaster : MonoBehaviour
         if (_planes.Length > 0 )
         {
             Instantiate(_planes[_currentPlaneId]);
+            _planeCount = _level * _planeMultiplePerLevel;
         }
     }
 
@@ -45,11 +50,16 @@ public class GameMaster : MonoBehaviour
         _levelTimer += Time.deltaTime;
     }
 
-    public void PlaneCrash(int planeID)
+    public void PlaneCrash(int planeID, bool planeHit)
     {
+        Debug.Log("Plane Crash #" + planeID + ": Hit? " + planeHit);
         _currentPlaneId++;
-        if (_currentPlaneId < _planes.Length) {
-            Instantiate(_planes[_currentPlaneId]);
+        if (planeHit) {
+            _score += 100;
+            _numberOfPlanesHit++;
+        }
+        if (_currentPlaneId < _planeCount) {
+            Instantiate(_planes[_currentPlaneId % _planes.Length]);
         } else {
             StartCoroutine(DisplayLevelWin(_level));
         }
@@ -57,11 +67,20 @@ public class GameMaster : MonoBehaviour
     
     private IEnumerator DisplayLevelWin(int level)
     {
+        string WonOrLose = "";
         _UISample.SetActive(true);
         _headerText.text = "Level " + level;
-        _modalText.text = "Grog has won Level " + level +
+        
+        if (_numberOfPlanesHit > 0) {
+            WonOrLose = "Won";
+        }  else {
+            WonOrLose = "Lose";
+        } 
+        _modalText.text = "Grog has " + WonOrLose + " Level " + level +
                           "\n It took " + TimeSpan.FromSeconds(_levelTimer).Minutes + 
-                          ":" + TimeSpan.FromSeconds(_levelTimer).Seconds;
+                          ":" + TimeSpan.FromSeconds(_levelTimer).Seconds +
+                          "\n Grog took down " + _numberOfPlanesHit + " planes."+
+                          "\n Grog's score is " + _score;
         foreach (GameObject firework in _fireworks)
         {
             firework.SetActive(true);
@@ -73,8 +92,10 @@ public class GameMaster : MonoBehaviour
         }
         _UISample.SetActive(false);
         _level++;
+        _planeCount = _level * _planeMultiplePerLevel;
         _currentPlaneId = 0;
         Instantiate(_planes[_currentPlaneId]);
         _levelTimer = 0f;
+        _numberOfPlanesHit = 0;
     }
 }

@@ -28,7 +28,8 @@ public class PlaneCollision : MonoBehaviour
         _audioSource.Play();
         this.transform.localPosition = Vector3.zero;
         this.transform.localRotation = Quaternion.identity;
-        StartCoroutine(ResizePlane());
+        StartCoroutine(GrowResizePlane());
+        StartCoroutine(LifeSpanOfPlane());
 
         if (_flames)
             _flames.SetActive(false);
@@ -76,7 +77,7 @@ public class PlaneCollision : MonoBehaviour
         }
 
         if (!_planeHasBeenHit) {
-            GameMaster.Instance.PlaneCrash(_planeID);
+            GameMaster.Instance.PlaneCrash(_planeID, true);
             _planeHasBeenHit = true;
         }
 
@@ -89,7 +90,16 @@ public class PlaneCollision : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    private IEnumerator ResizePlane()
+    private IEnumerator LifeSpanOfPlane()
+    {
+        yield return new WaitForSeconds(30f);
+        if (!_planeHasBeenHit)
+        {
+            StartCoroutine(ShrinkResizePlane());
+        }
+    }
+
+    private IEnumerator GrowResizePlane()
     {
         float scale = 0.0005f;
         while (scale < 0.2) {
@@ -97,5 +107,15 @@ public class PlaneCollision : MonoBehaviour
             scale += 0.0005f;
             yield return new WaitForSeconds(0.01f);
         }
+    }
+    private IEnumerator ShrinkResizePlane()
+    {
+        float scale = 0.2f;
+        while (scale > 0.0005) {
+            this.transform.localScale = Vector3.one * scale;
+            scale -= 0.0005f;
+            yield return new WaitForSeconds(0.01f);
+        }
+        GameMaster.Instance.PlaneCrash(_planeID, false);
     }
 }

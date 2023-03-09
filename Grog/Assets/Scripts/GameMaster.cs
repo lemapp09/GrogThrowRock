@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class GameMaster : MonoBehaviour
 {
@@ -16,28 +17,30 @@ public class GameMaster : MonoBehaviour
     private int _currentPlaneId = 0;
 
     void Awake() {
-        Instance = this;
-        if (_planes.Length > 0) {
+        Instance = this; 
+        if (_planes.Length > 0 ) {
             _planes[_currentPlaneId].gameObject.SetActive(true);
         }
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         _audioSource.Play();
     }
 
     private void OnDisable() {
         _audioSource.Stop();
     }
-    
 
-    public void PlaneCrash(int planeID) {
+
+    public void PlaneCrash(int planeID)
+    {           
         Debug.Log("Plane #" + planeID + " has crashed!");
-        
         _currentPlaneId++;
-        if (_currentPlaneId < _planes.Length ) {
+        if (_currentPlaneId < _planes.Length) {
             _planes[_currentPlaneId].gameObject.SetActive(true);
-            Debug.Log("Game Master is starting plane #" + _currentPlaneId);
+        } else {
+            Debug.Log("Level I complete");
         }
     }
 

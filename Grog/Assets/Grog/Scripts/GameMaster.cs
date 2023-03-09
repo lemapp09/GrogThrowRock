@@ -18,6 +18,7 @@ public class GameMaster : MonoBehaviour
     [SerializeField] private GameObject _UISample;
     [SerializeField] private TextMeshProUGUI _headerText;
     [SerializeField] private TextMeshProUGUI _modalText;
+    [SerializeField] private GameObject[] _fireworks;
     private int _level = 1;
     private float _levelTimer;
 
@@ -61,7 +62,15 @@ public class GameMaster : MonoBehaviour
         _modalText.text = "Grog has won Level " + level +
                           "\n It took " + TimeSpan.FromSeconds(_levelTimer).Minutes + 
                           ":" + TimeSpan.FromSeconds(_levelTimer).Seconds;
+        foreach (GameObject firework in _fireworks)
+        {
+            firework.SetActive(true);
+        }
         yield return new WaitForSeconds(10f);
+        foreach (GameObject firework in _fireworks)
+        {
+            firework.SetActive(false);
+        }
         _UISample.SetActive(false);
         _level++;
         _currentPlaneId = 0;

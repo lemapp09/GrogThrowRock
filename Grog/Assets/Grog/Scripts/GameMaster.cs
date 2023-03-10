@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 
 public class GameMaster : MonoBehaviour
@@ -12,6 +13,10 @@ public class GameMaster : MonoBehaviour
     private AudioSource _audioSource;
     //Music by
     //<a href="https://pixabay.com/users/audiocoffee-27005420/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=116705">Denys Kyshchuk</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=116705">Pixabay</a>
+
+    public XROrigin XrOrigin;
+
+    public AudioClip[] PlaneCrashClips;
 
     public static GameMaster Instance;
     private int _currentPlaneId = 0;
@@ -52,7 +57,6 @@ public class GameMaster : MonoBehaviour
 
     public void PlaneCrash(int planeID, bool planeHit)
     {
-        Debug.Log("Plane Crash #" + planeID + ": Hit? " + planeHit);
         _currentPlaneId++;
         if (planeHit) {
             _score += 100;
@@ -70,7 +74,6 @@ public class GameMaster : MonoBehaviour
         string WonOrLose = "";
         _UISample.SetActive(true);
         _headerText.text = "Level " + level;
-        
         if (_numberOfPlanesHit > 0) {
             WonOrLose = "Won";
         }  else {

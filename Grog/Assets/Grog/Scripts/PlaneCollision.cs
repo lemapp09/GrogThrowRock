@@ -10,11 +10,7 @@ public class PlaneCollision : MonoBehaviour
 
     [SerializeField] private int _planeID;
 
-    [SerializeField] private XROrigin _xrOrigin;
-
     [SerializeField] private AudioSource _audioSource;
-
-    [SerializeField] private AudioClip[] _crashClips;
 
     [SerializeField] private GameObject _flames;
 
@@ -62,12 +58,13 @@ public class PlaneCollision : MonoBehaviour
                 _splineWalker.enabled = false;
                 rigidBody.useGravity = true;
                 rigidBody.isKinematic = false;
-                Vector3 vector = (this.transform.position - _xrOrigin.transform.position).normalized * 15f;
+                Vector3 vector = (this.transform.position - GameMaster.Instance.XrOrigin.transform.position).normalized * 5f;
 
                 rigidBody.AddForce(vector.x, vector.y, vector.z, ForceMode.Impulse);
 
-                if (_crashClips.Length > 0)
-                    _audioSource.PlayOneShot(_crashClips[UnityEngine.Random.Range(0, _crashClips.Length - 1)]);
+                AudioClip[] planeCrashClips = GameMaster.Instance.PlaneCrashClips;
+                if (planeCrashClips.Length > 0)
+                    _audioSource.PlayOneShot(planeCrashClips[UnityEngine.Random.Range(0, planeCrashClips.Length - 1)]);
 
                 if (_flames)
                     _flames.SetActive(true);
@@ -89,7 +86,7 @@ public class PlaneCollision : MonoBehaviour
         yield return new WaitForSeconds(15f);
         this.gameObject.SetActive(false);
     }
-
+    
     private IEnumerator LifeSpanOfPlane()
     {
         yield return new WaitForSeconds(30f);

@@ -585,6 +585,85 @@ MonoBehaviour:
     c2: 0
     c3: 0
     c4: 0
+--- !u!1001 &222268890786084178
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4192193502713448195}
+    m_Modifications:
+    - target: {fileID: 1000011671376998, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+      propertyPath: m_Name
+      value: TinyFire
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011671376998, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010042286394, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010042286394, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012166036088, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012166036088, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012166036088, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012166036088, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012166036088, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012166036088, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012166036088, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012166036088, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012166036088, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012166036088, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012166036088, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+--- !u!4 &223945906530832170 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4000012166036088, guid: 1542f7c6a1809514fb3255ffe9e32fde,
+    type: 3}
+  m_PrefabInstance: {fileID: 222268890786084178}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4189278853506116227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -733,7 +812,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4194827560693120, guid: bbea6872df405a045862b0d1f277c5ac,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 223945906530832170}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1300689381462198, guid: bbea6872df405a045862b0d1f277c5ac,
         type: 3}
@@ -795,9 +878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _splineWalker: {fileID: 3444434784844615366}
   _planeID: 4
-  _xrOrigin: {fileID: 0}
   _audioSource: {fileID: 830378078380664728}
-  _crashClips: []
   _flames: {fileID: 0}
 --- !u!82 &830378078380664728
 AudioSource:

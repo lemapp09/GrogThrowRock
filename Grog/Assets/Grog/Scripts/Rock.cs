@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -93,14 +92,6 @@ class Rock : MonoBehaviour
         _homingCollider.enabled = false;
     }
 
-    void Update()
-    {
-        if (this.transform.position.y < -2)
-        {
-            GoHome();
-        }
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -123,9 +114,9 @@ class Rock : MonoBehaviour
 
             _rigidbody.AddForce(homingStrength * _lastNormal, ForceMode.Impulse); // Use impulse if adding force not inside FixedUpdate.
 
-            _audioSource.Play();
+            //_audioSource.Play();
 
-            Debug.Log("Homing...");
+            //Debug.Log("Homing...");
 
             //plane.OnHoming();
   

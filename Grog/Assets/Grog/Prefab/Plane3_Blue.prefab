@@ -668,6 +668,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3087393832589661914}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3088112358540477116 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000011671376998, guid: 1542f7c6a1809514fb3255ffe9e32fde,
+    type: 3}
+  m_PrefabInstance: {fileID: 3087393832589661914}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4847145490510450651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -882,10 +888,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _splineWalker: {fileID: 4803311133780891972}
   _planeID: 3
-  _xrOrigin: {fileID: 0}
   _audioSource: {fileID: 414683476935701379}
-  _crashClips: []
-  _flames: {fileID: 0}
+  _flames: {fileID: 3088112358540477116}
+  _propeller: {fileID: 4847871420898588763}
+  _propellerSpeed: 2000
+  PlaneHasBeenHit: 0
 --- !u!82 &414683476935701379
 AudioSource:
   m_ObjectHideFlags: 0
@@ -982,6 +989,12 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &4847871420898588763 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1016477963433856, guid: bbea6872df405a045862b0d1f277c5ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 4847145490510450651}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4848795735688553051 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4194827560693120, guid: bbea6872df405a045862b0d1f277c5ac,

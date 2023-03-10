@@ -19,6 +19,9 @@ class Rock : MonoBehaviour
     SphereCollider _homingCollider;
     Rigidbody _rigidbody;
     AudioSource _audioSource;
+    bool _readyForGroundSoundAgain = true;
+
+    WaitForSeconds _wait4Sec = new WaitForSeconds(4.0f);
 
     Vector3 _spawnPosition;
     Vector3 _lastHere;
@@ -53,6 +56,20 @@ class Rock : MonoBehaviour
     public void StopThrow()
     {
         _homingCollider.enabled = false;
+        if (_readyForGroundSoundAgain)
+        {
+            _readyForGroundSoundAgain = false;
+            GameMaster.Instance.GrogSoundGood(Delay.None);
+
+            // This prevents repeated sounds when rock is rolling on the ground.
+            StartCoroutine(WaitToPlayGroundSoundAgain());
+        }
+    }
+
+    IEnumerator WaitToPlayGroundSoundAgain()
+    {
+        yield return _wait4Sec;
+        _readyForGroundSoundAgain = true;
     }
 
     public void GoHome()
@@ -65,11 +82,19 @@ class Rock : MonoBehaviour
 
     void RockWasGrabbed(SelectEnterEventArgs args)
     {
+        GameMaster.Instance.GrogSoundHuh();
+
         if (args.interactorObject.transform.parent.gameObject == leftHandTop)
             GrabbedOnLeft();
         else
             GrabbedOnRight();
     }
+
+    void RockWasThrown(SelectExitEventArgs args)
+    {
+        _rigidbody.AddForce(new Vector3(0, 3.0f, 0), ForceMode.Impulse);
+    }
+
 
     void Start()
     {
@@ -85,7 +110,8 @@ class Rock : MonoBehaviour
             return;
         }
 
-        _grabInteractable.selectEntered.AddListener(RockWasGrabbed) ;
+        _grabInteractable.selectEntered.AddListener(RockWasGrabbed);
+        _grabInteractable.selectExited.AddListener(RockWasThrown);
 
         _spawnPosition = transform.position;
 
@@ -96,7 +122,6 @@ class Rock : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            StopThrow();
             Debug.Log("Collision object touched ground!");
             if (collision.contacts[0].thisCollider is not SphereCollider)
                 StopThrow();
@@ -106,20 +131,13 @@ class Rock : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         PlaneCollision planeCollision = other.gameObject.GetComponent<PlaneCollision>();
-        if (planeCollision) // TODO: Check for if plane is downed, then do not do this.
+        if (planeCollision && !planeCollision.PlaneHasBeenHit) // Check for if plane is downed already before homing.
         {
             _lastHere = transform.position;
             _lastThere = other.transform.position;
             _lastNormal = (_lastThere - _lastHere).normalized;
 
             _rigidbody.AddForce(homingStrength * _lastNormal, ForceMode.Impulse); // Use impulse if adding force not inside FixedUpdate.
-
-            //_audioSource.Play();
-
-            //Debug.Log("Homing...");
-
-            //plane.OnHoming();
-  
         }
     }
 

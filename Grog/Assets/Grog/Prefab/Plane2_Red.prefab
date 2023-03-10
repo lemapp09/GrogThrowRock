@@ -656,6 +656,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 498332552362166815}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &498179173919891065 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000011671376998, guid: 1542f7c6a1809514fb3255ffe9e32fde,
+    type: 3}
+  m_PrefabInstance: {fileID: 498332552362166815}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6987118997343672721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -871,7 +877,10 @@ MonoBehaviour:
   _splineWalker: {fileID: 1153628965992913519}
   _planeID: 2
   _audioSource: {fileID: 4749371812724771981}
-  _flames: {fileID: 0}
+  _flames: {fileID: 498179173919891065}
+  _propeller: {fileID: 6986393426369654289}
+  _propellerSpeed: 1500
+  PlaneHasBeenHit: 0
 --- !u!82 &4749371812724771981
 AudioSource:
   m_ObjectHideFlags: 0
@@ -968,6 +977,12 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &6986393426369654289 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1016477963433856, guid: bbea6872df405a045862b0d1f277c5ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 6987118997343672721}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6987858846910493713 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4194827560693120, guid: bbea6872df405a045862b0d1f277c5ac,

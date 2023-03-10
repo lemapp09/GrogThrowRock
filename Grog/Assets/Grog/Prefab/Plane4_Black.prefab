@@ -658,6 +658,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
+--- !u!1 &222406883046924596 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000011671376998, guid: 1542f7c6a1809514fb3255ffe9e32fde,
+    type: 3}
+  m_PrefabInstance: {fileID: 222268890786084178}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &223945906530832170 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012166036088, guid: 1542f7c6a1809514fb3255ffe9e32fde,
@@ -739,6 +745,22 @@ PrefabInstance:
     - target: {fileID: 4194827560693120, guid: bbea6872df405a045862b0d1f277c5ac, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4849428758027974, guid: bbea6872df405a045862b0d1f277c5ac, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4849428758027974, guid: bbea6872df405a045862b0d1f277c5ac, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4849428758027974, guid: bbea6872df405a045862b0d1f277c5ac, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4849428758027974, guid: bbea6872df405a045862b0d1f277c5ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23110613683051130, guid: bbea6872df405a045862b0d1f277c5ac,
         type: 3}
@@ -831,6 +853,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 830378078380664728}
   m_SourcePrefab: {fileID: 100100000, guid: bbea6872df405a045862b0d1f277c5ac, type: 3}
+--- !u!1 &4188579173123955971 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1016477963433856, guid: bbea6872df405a045862b0d1f277c5ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 4189278853506116227}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4190546761280010805 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1300689381462198, guid: bbea6872df405a045862b0d1f277c5ac,
@@ -879,7 +907,10 @@ MonoBehaviour:
   _splineWalker: {fileID: 3444434784844615366}
   _planeID: 4
   _audioSource: {fileID: 830378078380664728}
-  _flames: {fileID: 0}
+  _flames: {fileID: 222406883046924596}
+  _propeller: {fileID: 4188579173123955971}
+  _propellerSpeed: 2500
+  PlaneHasBeenHit: 0
 --- !u!82 &830378078380664728
 AudioSource:
   m_ObjectHideFlags: 0

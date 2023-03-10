@@ -334,7 +334,7 @@ Transform:
   - {fileID: 1893848873448733303}
   - {fileID: 4203920946446136738}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4206500206278981568
 MonoBehaviour:
@@ -678,7 +678,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4194827560693120, guid: bbea6872df405a045862b0d1f277c5ac,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1963322215824550318}
+      addedObject: {fileID: 3264656057222012132}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1300689381462198, guid: bbea6872df405a045862b0d1f277c5ac,
         type: 3}
@@ -693,6 +693,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3685206098562347467}
   m_SourcePrefab: {fileID: 100100000, guid: bbea6872df405a045862b0d1f277c5ac, type: 3}
+--- !u!1 &1959829592251606102 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1016477963433856, guid: bbea6872df405a045862b0d1f277c5ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 1959394430244492246}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1960671270996640608 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1300689381462198, guid: bbea6872df405a045862b0d1f277c5ac,
@@ -713,14 +719,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _splineWalker: {fileID: 2929465155742266300}
   _planeID: 1
-  _xrOrigin: {fileID: 0}
   _audioSource: {fileID: 3685206098562347467}
-  _crashClips:
-  - {fileID: 8300000, guid: b6ccbe5ae2679dc4cb7a32278834c836, type: 3}
-  - {fileID: 8300000, guid: 2b099821e98cfa3439b4a2b7dbee04a1, type: 3}
-  - {fileID: 8300000, guid: f705e23a0cacfc84abf39a12d6621a94, type: 3}
-  - {fileID: 8300000, guid: 231e5ddb74a833449a867a0768d5a333, type: 3}
-  _flames: {fileID: 1959812797175662512}
+  _flames: {fileID: 3261691482020180730}
+  _propeller: {fileID: 1959829592251606102}
+  _propellerSpeed: 1000
+  PlaneHasBeenHit: 0
 --- !u!54 &6082984174426697530
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -760,7 +763,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cab1b519904b2874591db3ee6c6e89e4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.061
+  m_Volume: 0.096
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -927,13 +930,13 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1542f7c6a1809514fb3255ffe9e32fde, type: 3}
---- !u!1 &1959812797175662512 stripped
+--- !u!1 &3261691482020180730 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000011671376998, guid: 1542f7c6a1809514fb3255ffe9e32fde,
     type: 3}
   m_PrefabInstance: {fileID: 3260701368780547740}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1963322215824550318 stripped
+--- !u!4 &3264656057222012132 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012166036088, guid: 1542f7c6a1809514fb3255ffe9e32fde,
     type: 3}

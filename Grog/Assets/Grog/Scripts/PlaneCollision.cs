@@ -12,12 +12,51 @@ public class PlaneCollision : MonoBehaviour
 
     [SerializeField] private AudioSource _audioSource;
 
+    private AudioSource _hitAudioSource;
+
     [SerializeField] private GameObject _flames;
 
-    private bool _planeHasBeenHit;
+    [SerializeField] private GameObject _propeller;
+
+    [SerializeField] private float _propellerSpeed = 20.0f;
+
+    private float _propellerAngle = 0.0f;
+
+    public bool PlaneHasBeenHit;
 
     // Sound Effect from
     // <a href="https://pixabay.com/sound-effects/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=14513">Pixabay</a>
+
+    public void SoundPlaneHit()
+    {
+        AudioClip[] planeHitClips = GameMaster.Instance.PlaneHitClips;
+        if (planeHitClips.Length > 0)
+            _hitAudioSource.PlayOneShot(planeHitClips[UnityEngine.Random.Range(0, planeHitClips.Length - 1)], 0.4f);
+
+    }
+
+    public void SoundPlaneExplode()
+    {
+        AudioClip[] planeExplodeClips = GameMaster.Instance.PlaneExplodeClips;
+        if (planeExplodeClips.Length > 0)
+            _hitAudioSource.PlayOneShot(planeExplodeClips[UnityEngine.Random.Range(0, planeExplodeClips.Length - 1)], 0.4f);
+    }
+
+    public void Start()
+    {
+        _hitAudioSource = gameObject.AddComponent<AudioSource>();
+    }
+
+    public void Update()
+    {
+        if (_propeller)
+        {
+            float divider = PlaneHasBeenHit ? 10.0f : 1.0f;
+            
+            _propellerAngle += (_propellerSpeed / divider) * Time.deltaTime;
+            _propeller.transform.localRotation = Quaternion.Euler(0, 0, _propellerAngle);
+        }
+    }
 
     private void OnEnable()
     {
@@ -62,20 +101,23 @@ public class PlaneCollision : MonoBehaviour
 
                 rigidBody.AddForce(vector.x, vector.y, vector.z, ForceMode.Impulse);
 
-                AudioClip[] planeCrashClips = GameMaster.Instance.PlaneCrashClips;
-                if (planeCrashClips.Length > 0)
-                    _audioSource.PlayOneShot(planeCrashClips[UnityEngine.Random.Range(0, planeCrashClips.Length - 1)]);
-
                 if (_flames)
                     _flames.SetActive(true);
 
+                SoundPlaneHit();
+                GameMaster.Instance.GrogSoundSurprised(Delay.ThreeSeconds);
+
                 rock.GoHome();
+            }
+            else if(collision.gameObject.CompareTag("Ground"))
+            {
+                SoundPlaneExplode();
             }
         }
 
-        if (!_planeHasBeenHit) {
+        if (!PlaneHasBeenHit) {
             GameMaster.Instance.PlaneCrash(_planeID, true);
-            _planeHasBeenHit = true;
+            PlaneHasBeenHit = true;
         }
 
         StartCoroutine(RemoveDownPlane());
@@ -90,7 +132,7 @@ public class PlaneCollision : MonoBehaviour
     private IEnumerator LifeSpanOfPlane()
     {
         yield return new WaitForSeconds(30f);
-        if (!_planeHasBeenHit)
+        if (!PlaneHasBeenHit)
         {
             StartCoroutine(ShrinkResizePlane());
         }
@@ -114,5 +156,6 @@ public class PlaneCollision : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         GameMaster.Instance.PlaneCrash(_planeID, false);
+        _audioSource.Stop();
     }
 }
